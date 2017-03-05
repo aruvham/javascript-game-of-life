@@ -14,9 +14,9 @@ var game,           // game object
     s = 10,         // size of each block
     w = 500,        // width of canvas
     h = 500,        // height of canvas
-    cols = h / s,   // # of columns on the grid
-    rows = w / s,   // # of rows on the grid
-    colors = { 
+    cols = w / s,   // # of columns on the grid
+    rows = h / s,   // # of rows on the grid
+    colors = {
       bg:         "#333333",
       grid:       "#646464",
       cell:       "#4A7B6F"
@@ -26,7 +26,7 @@ var game,           // game object
 // game state variables
 //-------------------------------------------------------------------------
 
-var fRate = 60/30,
+var fRate = 60 / 30,
     fCounter = 0,
     paused = true;
 
@@ -36,7 +36,7 @@ var fRate = 60/30,
 
 function Conway() {
   this.grid = [];
-  
+
   this.init = function() {
     for (var x = 0; x < cols; x++) {
       for (var y = 0; y < rows; y++) {
@@ -45,25 +45,25 @@ function Conway() {
     }
     this.clear();
   }
-  
+
   this.update = function() {
     this.grid.forEach(function(c){
       c.update();
     });
   }
-  
+
   this.show = function() {
     this.grid.forEach(function(c){
       c.show();
     });
   }
-  
+
   this.swap = function() {
     this.grid.forEach(function(c){
       c.swap();
     });
   }
-  
+
   this.save = function() {
     var s = "[";
     this.grid.forEach(function(c){
@@ -83,27 +83,28 @@ function Conway() {
     this.update();
     this.show();
   }
-  
+
   this.clear = function() {
     this.grid.forEach(function(c){
       c.alive = false;
-    });   
+      c.next = false;
+    });
     this.update();
     this.show();
   }
-  
+
   this.random = function() {
     this.grid.forEach(function(c){
       c.alive = random() > 0.5;
-    });  
+    });
     this.update();
-    this.show();  
+    this.show();
   }
-  
+
   this.checkMouse = function() {
     this.grid.forEach(function(c){
       c.checkMouse();
-    });       
+    });
     this.update();
     this.show();
   }
@@ -118,7 +119,7 @@ function Cell(x, y) {
   this.y = y;
   this.alive;
   this.next;
-  
+
   this.neighborIndexList = [index(x - 1, y - 1),  // top left
                             index(x - 1, y    ),  // left
                             index(x - 1, y + 1),  // bottom left
@@ -151,17 +152,19 @@ function Cell(x, y) {
     if( this.alive && n >   3) this.next = false; // dies of overpopulation
     if( this.alive && n <   2) this.next = false; // dies of under-population
   }
-  
+
   this.swap = function() {
     this.alive = this.next;
   }
-  
+
   this.checkMouse = function() {
     if(mouseX > this.x * s     &&
        mouseX < this.x * s + s &&
        mouseY > this.y * s     &&
        mouseY < this.y * s + s) {
-      this.alive = !this.alive;
+      //this.alive = !this.alive;
+      //console.log(this.neighbors());
+      console.log(x, y);
     }
   }
 }
@@ -196,7 +199,7 @@ function draw() {
 
 function keyPressed() {
   if(keyCode == ENTER)                    paused = !paused;
-  if(keyCode == RIGHT_ARROW && paused) {  game.update(); 
+  if(keyCode == RIGHT_ARROW && paused) {  game.update();
                                           game.swap();}
   if(keyCode == 82 && paused)             game.random();
   if(keyCode == 69 && paused)             game.clear();
@@ -215,10 +218,11 @@ function mousePressed() {
 //-------------------------------------------------------------------------
 
 function index(x, y) {
-    return (x < 0        || 
-            y < 0        || 
-            x > cols - 1 ||
-            y > rows - 1) ? -1 : x + y * cols;
+    if(x < 0) x = cols - 1;
+    if(x > cols - 1) x = 0;
+    if(y < 0) y = rows - 1;
+    if(y > rows - 1) y = 0;
+    return x + y * cols;
 }
 
 //-------------------------------------------------------------------------
