@@ -28,7 +28,9 @@ var game,           // game object
                 // default speed   = 60 FPS
 var fRate = 5, // new speed = 60/5 = 12 FPS
     fCounter = 0,
-    paused = true;
+    paused = true,
+    grid = true,
+    trail = false;
 
 //-------------------------------------------------------------------------
 // Conway object
@@ -146,10 +148,11 @@ function Cell(x, y) {
   }
 
   this.show = function() {
-    stroke(colors.grid);
+    if(grid) stroke(colors.grid);
+    else     noStroke();
 
     if     (this.alive) fill(colors.cell);
-    else if(this.trail) fill(colors.trail);
+    else if(this.trail && trail) fill(colors.trail);
     else                noFill();
 
     rect(this.x * s, this.y * s, s, s);
@@ -233,7 +236,9 @@ var $run   = $("#run"),
     $clear = $("#clear"),
     $save  = $("#save"),
     $load  = $("#load"),
-    $textarea = $("#textarea");
+    $textarea = $("#textarea"),
+    $grid = $("#grid"),
+    $trail = $("#trail");
 
 //-------------------------------------------------------------------------
 // DOM interaction
@@ -263,4 +268,18 @@ $load.click(function() {
   if(paused) {
     game.load(JSON.parse($textarea.val()));
   }
-})
+});
+
+$grid.click(function() {
+  if(paused) {
+    grid = !grid;
+    game.show();
+  }
+});
+
+$trail.click(function() {
+  if(paused) {
+    trail = !trail;
+    game.show();
+  }
+});
