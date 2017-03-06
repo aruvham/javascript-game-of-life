@@ -25,8 +25,8 @@ var game,           // game object
 // game state variables
 //-------------------------------------------------------------------------
 
-                // default speed     = 60 FPS
-var fRate = 30, // new speed = 60/30 = 2 FPS
+                // default speed   = 60 FPS
+var fRate = 5, // new speed = 60/5 = 12 FPS
     fCounter = 0,
     paused = true;
 
@@ -205,17 +205,6 @@ function draw() {
 }
 
 //-------------------------------------------------------------------------
-// key events
-//-------------------------------------------------------------------------
-
-function keyPressed() {
-  if(keyCode == ENTER)                    paused = !paused;
-  if(keyCode == RIGHT_ARROW && paused)    game.step();
-  if(keyCode == 82 && paused)             game.random(); // "R"
-  if(keyCode == 69 && paused)             game.clear();  // "E"
-}
-
-//-------------------------------------------------------------------------
 // mouse events
 //-------------------------------------------------------------------------
 
@@ -236,5 +225,29 @@ function index(x, y) {
 }
 
 //-------------------------------------------------------------------------
-// DOM manipulation
+// DOM variables
 //-------------------------------------------------------------------------
+
+var $run   = $("#run"),
+    $step  = $("#step"),
+    $clear = $("#clear"),
+    $save  = $("#save"),
+    $load  = $("#load");
+
+//-------------------------------------------------------------------------
+// DOM interaction
+//-------------------------------------------------------------------------
+
+$run.click(function() {
+  if(paused) $run.html("Pause");
+  else       $run.html("Run");
+  paused = !paused;
+});
+
+$step.click(function() {
+  if(paused) game.step();
+});
+
+$clear.click(function() {
+  if(paused) game.clear();
+});
