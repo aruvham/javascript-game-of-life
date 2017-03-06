@@ -1,17 +1,12 @@
 // Conway's Game of Life
-// by Arturo Ruvalcaba
-
-// To do:
-//  Menu
-//  Does not work if w !== h
-//  Speed controls
+// Arturo Ruvalcaba
 
 //-------------------------------------------------------------------------
 // game constants
 //-------------------------------------------------------------------------
 
 var game,           // game object
-    s = 10,         // size of each block
+    s = 25,         // size of each block
     w = 500,        // width of canvas
     h = 500,        // height of canvas
     cols = w / s,   // # of columns on the grid
@@ -26,7 +21,8 @@ var game,           // game object
 // game state variables
 //-------------------------------------------------------------------------
 
-var fRate = 60 / 30,
+                // default speed     = 60 FPS
+var fRate = 30, // new speed = 30/60 = 0.5 FPS
     fCounter = 0,
     paused = true;
 
@@ -43,7 +39,6 @@ function Conway() {
         this.grid[index(x, y)] = new Cell(x, y);
       }
     }
-    this.clear();
   }
 
   this.update = function() {
@@ -64,6 +59,20 @@ function Conway() {
     });
   }
 
+  this.clear = function() {
+    this.grid.forEach(function(c){
+      c.alive = false;
+    });
+    this.show();
+  }
+
+  this.random = function() {
+    this.grid.forEach(function(c){
+      c.alive = random() < 0.25;
+    });
+    this.show();
+  }
+
   this.save = function() {
     var s = "[";
     this.grid.forEach(function(c){
@@ -78,26 +87,8 @@ function Conway() {
   this.load = function(a) {
     this.clear();
     this.grid.forEach(function(c, i){
-      c.alive = a[i] == 1;
+      c.alive = a[i] === 1;
     });
-    this.update();
-    this.show();
-  }
-
-  this.clear = function() {
-    this.grid.forEach(function(c){
-      c.alive = false;
-      c.next = false;
-    });
-    this.update();
-    this.show();
-  }
-
-  this.random = function() {
-    this.grid.forEach(function(c){
-      c.alive = random() > 0.5;
-    });
-    this.update();
     this.show();
   }
 
@@ -105,7 +96,6 @@ function Conway() {
     this.grid.forEach(function(c){
       c.checkMouse();
     });
-    this.update();
     this.show();
   }
 }
@@ -117,8 +107,8 @@ function Conway() {
 function Cell(x, y) {
   this.x = x;
   this.y = y;
-  this.alive;
-  this.next;
+  this.alive = false;
+  this.next = false;
 
   this.neighborIndexList = [index(x - 1, y - 1),  // top left
                             index(x - 1, y    ),  // left
@@ -129,14 +119,7 @@ function Cell(x, y) {
                             index(x + 1, y    ),  // right
                             index(x + 1, y + 1)]; // bottom right
 
-  this.show = function() {
-    stroke(colors.grid);
-    if(this.alive) fill(colors.cell);
-    else           noFill();
-    rect(this.x * s, this.y * s, s, s);
-  }
-
-  this.neighbors = function() {
+  this.aliveNeighbors = function() {
     var counter = 0;
     this.neighborIndexList.forEach(function(i){
       if(game.grid[i] && game.grid[i].alive) counter++;
@@ -144,8 +127,16 @@ function Cell(x, y) {
     return counter;
   }
 
+  this.show = function() {
+    stroke(colors.grid);
+    if(this.alive) fill(colors.cell);
+    else           noFill();
+    rect(this.x * s, this.y * s, s, s);
+  }
+
   this.update = function() {
-    var n = this.neighbors();
+    var n = this.aliveNeighbors();
+    this.next = false;                            // default
     if( this.alive && n ==  3) this.next = true;  // lives on
     if( this.alive && n ==  2) this.next = true;  // lives on
     if(!this.alive && n ==  3) this.next = true;  // reproduction
@@ -162,9 +153,7 @@ function Cell(x, y) {
        mouseX < this.x * s + s &&
        mouseY > this.y * s     &&
        mouseY < this.y * s + s) {
-      //this.alive = !this.alive;
-      //console.log(this.neighbors());
-      console.log(x, y);
+      this.alive = !this.alive;
     }
   }
 }
@@ -200,9 +189,9 @@ function draw() {
 function keyPressed() {
   if(keyCode == ENTER)                    paused = !paused;
   if(keyCode == RIGHT_ARROW && paused) {  game.update();
-                                          game.swap();}
-  if(keyCode == 82 && paused)             game.random();
-  if(keyCode == 69 && paused)             game.clear();
+                                          game.swap(); }
+  if(keyCode == 82 && paused)             game.random(); // "R"
+  if(keyCode == 69 && paused)             game.clear();  // "E"
 }
 
 //-------------------------------------------------------------------------
