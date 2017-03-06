@@ -2,19 +2,20 @@
 // Arturo Ruvalcaba
 
 //-------------------------------------------------------------------------
-// game constants
+// game variables
 //-------------------------------------------------------------------------
 
 var game,           // game object
-    s = 25,         // size of each block
-    w = 500,        // width of canvas
-    h = 500,        // height of canvas
+    s = 10,         // size of each block
+    w = 400,        // width of canvas
+    h = 400,        // height of canvas
     cols = w / s,   // # of columns on the grid
     rows = h / s,   // # of rows on the grid
     colors = {
       bg:         "#333333",
       grid:       "#646464",
-      cell:       "#4A7B6F"
+      cell:       "#4A7B6F",
+      trail:      "#4a8cf7"
     }
 
 //-------------------------------------------------------------------------
@@ -22,7 +23,7 @@ var game,           // game object
 //-------------------------------------------------------------------------
 
                 // default speed     = 60 FPS
-var fRate = 30, // new speed = 30/60 = 0.5 FPS
+var fRate = 30, // new speed = 60/30 = 2 FPS
     fCounter = 0,
     paused = true;
 
@@ -109,6 +110,7 @@ function Cell(x, y) {
   this.y = y;
   this.alive = false;
   this.next = false;
+  this.trail = false;
 
   this.neighborIndexList = [index(x - 1, y - 1),  // top left
                             index(x - 1, y    ),  // left
@@ -129,12 +131,17 @@ function Cell(x, y) {
 
   this.show = function() {
     stroke(colors.grid);
-    if(this.alive) fill(colors.cell);
-    else           noFill();
+
+    if     (this.alive) fill(colors.cell);
+    else if(this.trail) fill(colors.trail);
+    else                noFill();
+    
     rect(this.x * s, this.y * s, s, s);
   }
 
   this.update = function() {
+    if(this.alive) this.trail = true;
+
     var n = this.aliveNeighbors();
     this.next = false;                            // default
     if( this.alive && n ==  3) this.next = true;  // lives on
