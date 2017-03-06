@@ -16,7 +16,10 @@ var game,           // game object
       grid:       "#646464",
       cell:       "#4A7B6F",
       trail:      "#4a8cf7"
-    }
+    },
+
+    generations = 0;
+    aliveCells = 0;
 
 //-------------------------------------------------------------------------
 // game state variables
@@ -43,7 +46,9 @@ function Conway() {
   }
 
   this.update = function() {
+    aliveCells = 0;
     this.grid.forEach(function(c){
+      if(c.alive) aliveCells++;
       c.update();
     });
   }
@@ -60,7 +65,16 @@ function Conway() {
     });
   }
 
+  this.step = function() {
+    generations++;
+    this.update();
+    this.swap();
+
+    console.log("generations : " + generations + ", aliveCells : " + aliveCells);
+  }
+
   this.clear = function() {
+    generations = 0;
     this.grid.forEach(function(c){
       c.alive = false;
       c.trail = false;
@@ -69,6 +83,7 @@ function Conway() {
   }
 
   this.random = function() {
+    this.clear();
     this.grid.forEach(function(c){
       c.alive = random() < 0.25;
     });
@@ -184,8 +199,7 @@ function draw() {
   background(colors.bg);
   game.show();
   if(!paused && fCounter % fRate == 0) {
-    game.update();
-    game.swap();
+    game.step();
   }
   fCounter++;
 }
@@ -196,8 +210,7 @@ function draw() {
 
 function keyPressed() {
   if(keyCode == ENTER)                    paused = !paused;
-  if(keyCode == RIGHT_ARROW && paused) {  game.update();
-                                          game.swap(); }
+  if(keyCode == RIGHT_ARROW && paused)    game.step();
   if(keyCode == 82 && paused)             game.random(); // "R"
   if(keyCode == 69 && paused)             game.clear();  // "E"
 }
