@@ -7,7 +7,7 @@
 
 var game,           // game object
     s = 10,         // size of each block
-    w = 400,        // width of canvas
+    w = 600,        // width of canvas
     h = 400,        // height of canvas
     cols = w / s,   // # of columns on the grid
     rows = h / s,   // # of rows on the grid
@@ -87,7 +87,7 @@ function Conway() {
   this.random = function() {
     this.clear();
     this.grid.forEach(function(c){
-      c.alive = random() < 0.25;
+      c.alive = random() < 0.20;
     });
     this.show();
   }
@@ -243,7 +243,9 @@ var $run   = $("#run"),
     $bgColor = $("#bgColor"),
     $gridColor = $("#gridColor"),
     $cellColor = $("#cellColor"),
-    $trailColor = $("#trailColor");
+    $trailColor = $("#trailColor"),
+    $random = $("#random"),
+    $patterns = $("#patterns");
 
 //-------------------------------------------------------------------------
 // DOM interaction
@@ -266,6 +268,7 @@ $clear.click(function() {
 $save.click(function() {
   if(paused) {
     $textarea.val(game.save());
+    $textarea.select();
   }
 });
 
@@ -304,4 +307,14 @@ $cellColor.change(function() {
 
 $trailColor.change(function() {
   colors.trail = $trailColor.val();
+});
+
+$random.click(function() {
+  if(paused) game.random();
+});
+
+$patterns.change(function() {
+  if(paused) {
+    game.load(patterns[$patterns.val()]);
+  }
 });
