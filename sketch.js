@@ -232,7 +232,8 @@ var $run   = $("#run"),
     $step  = $("#step"),
     $clear = $("#clear"),
     $save  = $("#save"),
-    $load  = $("#load");
+    $load  = $("#load"),
+    $textarea = $("#textarea");
 
 //-------------------------------------------------------------------------
 // DOM interaction
@@ -251,3 +252,15 @@ $step.click(function() {
 $clear.click(function() {
   if(paused) game.clear();
 });
+
+$save.click(function() {
+  if(paused) {
+    $textarea.val(game.save());
+  }
+});
+
+$load.click(function() {
+  if(paused) {
+    game.load(JSON.parse($textarea.val()));
+  }
+})
