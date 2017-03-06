@@ -30,7 +30,7 @@ var fRate = 5, // new speed = 60/5 = 12 FPS
     fCounter = 0,
     paused = true,
     grid = true,
-    trail = false;
+    trail = true;
 
 //-------------------------------------------------------------------------
 // Conway object
@@ -237,6 +237,7 @@ var $run   = $("#run"),
     $save  = $("#save"),
     $load  = $("#load"),
     $textarea = $("#textarea"),
+    $speed = $("#speed"),
     $grid = $("#grid"),
     $trail = $("#trail"),
     $bgColor = $("#bgColor"),
@@ -272,6 +273,13 @@ $load.click(function() {
   if(paused) {
     game.load(JSON.parse($textarea.val()));
   }
+});
+
+$speed.change(function() {
+  var speed = parseInt($speed.val());
+  if(speed === 60) speed = 59;
+  fRate = (60 - speed);
+  console.log(fRate);
 });
 
 $grid.click(function() {
