@@ -238,7 +238,11 @@ var $run   = $("#run"),
     $load  = $("#load"),
     $textarea = $("#textarea"),
     $grid = $("#grid"),
-    $trail = $("#trail");
+    $trail = $("#trail"),
+    $bgColor = $("#bgColor"),
+    $gridColor = $("#gridColor"),
+    $cellColor = $("#cellColor"),
+    $trailColor = $("#trailColor");
 
 //-------------------------------------------------------------------------
 // DOM interaction
@@ -271,15 +275,25 @@ $load.click(function() {
 });
 
 $grid.click(function() {
-  if(paused) {
-    grid = !grid;
-    game.show();
-  }
+  grid = !grid;
 });
 
 $trail.click(function() {
-  if(paused) {
-    trail = !trail;
-    game.show();
-  }
+  trail = !trail;
+});
+
+$bgColor.change(function() {
+  colors.bg = $bgColor.val();
+});
+
+$gridColor.change(function() {
+  colors.grid = $gridColor.val();
+});
+
+$cellColor.change(function() {
+  colors.cell = $cellColor.val();
+});
+
+$trailColor.change(function() {
+  colors.trail = $trailColor.val();
 });
