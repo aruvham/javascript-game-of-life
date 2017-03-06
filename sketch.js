@@ -63,6 +63,7 @@ function Conway() {
   this.clear = function() {
     this.grid.forEach(function(c){
       c.alive = false;
+      c.trail = false;
     });
     this.show();
   }
@@ -135,7 +136,7 @@ function Cell(x, y) {
     if     (this.alive) fill(colors.cell);
     else if(this.trail) fill(colors.trail);
     else                noFill();
-    
+
     rect(this.x * s, this.y * s, s, s);
   }
 
