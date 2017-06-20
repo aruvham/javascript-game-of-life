@@ -25,7 +25,7 @@ var game,           // game object
 // game state variables
 //-------------------------------------------------------------------------
 
-                // default speed   = 60 FPS
+               // default speed   = 60 FPS
 var fRate = 5, // new speed = 60/5 = 12 FPS
     fCounter = 0,
     paused = true,
