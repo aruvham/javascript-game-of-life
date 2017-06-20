@@ -72,7 +72,7 @@ function Conway() {
     this.update();
     this.swap();
 
-    console.log("generations : " + generations + ", aliveCells : " + aliveCells);
+    $("#stats").html("Generations : " + generations + ", AliveCells : " + aliveCells)
   }
 
   this.clear = function() {
@@ -282,7 +282,7 @@ $speed.change(function() {
   var speed = parseInt($speed.val());
   if(speed === 60) speed = 59;
   fRate = (60 - speed);
-  console.log(fRate);
+  // console.log(fRate);
 });
 
 $grid.click(function() {
