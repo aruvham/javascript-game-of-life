@@ -3,40 +3,48 @@
     <head>
         <meta charset="UTF-8">
         <title>Game of Life</title>
+        <link rel="stylesheet" href="styles.css">
     </head>
     <body>
-      <button id="run">Run</button>
-      <button id="step">Step</button>
-      <button id="clear">Clear</button>
-      <button id="save">Save</button>
-      <button id="load">Load</button>
+      <div class="container">
+        <button id="run">Run</button>
+        <button id="step">Step</button>
+        <button id="clear">Clear</button>
+        <button id="save">Save</button>
+        <button id="load">Load</button>
 
-      <textarea id="textarea"></textarea>
+        <textarea id="textarea"></textarea>
+      </div>
 
-      <input id="speed" type="range" min="0" max="60" step="5">
+      <div class="container">
+        <label>Speed</label>
+        <input id="speed" type="range" min="0" max="60" step="5">
+      </div>
 
-      <button id="grid">Grid</button>
-      <button id="trail">Trail</button>
-      <input id="bgColor"    type="color" value="#333333"/>
-      <input id="gridColor"  type="color" value="#646464"/>
-      <input id="cellColor"  type="color" value="#4A7B6F"/>
-      <input id="trailColor" type="color" value="#4a8cf7"/>
+      <div class="container">
+        <button id="grid">Grid</button>
+        <button id="trail">Trail</button>
+        <input id="bgColor"    type="color" value="#333333"/>
+        <input id="gridColor"  type="color" value="#646464"/>
+        <input id="cellColor"  type="color" value="#4A7B6F"/>
+        <input id="trailColor" type="color" value="#4a8cf7"/>
 
-      <button id="random">Random</button>
+        <button id="random">Random</button>
 
-      <select id="patterns">
-        <option value="none">None</option>
-        <option value="still lifes">Still Lifes</option>
-        <option value="oscillators">Oscillators</option>
-        <option value="pulsar">Pulsar</option>
-        <option value="pentadecathlon">Pentadecathlon</option>
-        <option value="glider">Glider</option>
-        <option value="lwss">Lightweight Spaceship</option>
-        <option value="r-pentomino">R-pentomino</option>
-        <option value="diehard">Diehard</option>
-        <option value="acorn">Acorn</option>
-        <option value="gosper">Gosper Glider Gun</option>
-      </select>
+        <select id="patterns">
+          <option value="none">None</option>
+          <option value="still lifes">Still Lifes</option>
+          <option value="oscillators">Oscillators</option>
+          <option value="pulsar">Pulsar</option>
+          <option value="pentadecathlon">Pentadecathlon</option>
+          <option value="glider">Glider</option>
+          <option value="lwss">Lightweight Spaceship</option>
+          <option value="r-pentomino">R-pentomino</option>
+          <option value="diehard">Diehard</option>
+          <option value="acorn">Acorn</option>
+          <option value="gosper">Gosper Glider Gun</option>
+        </select>
+      </div>
 
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
       <script src="libs/p5.min.js"></script>

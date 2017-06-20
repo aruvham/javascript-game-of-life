@@ -1,0 +1,21 @@
+html { height: 100%; }
+
+body {
+  height: 100%;
+  background-color: #DDD;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: sans-serif;
+}
+
+canvas {
+  margin-top: 20px;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
