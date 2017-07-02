@@ -28,24 +28,25 @@ Controls:
 </h3>
 
 * **Run:** Plays the simulation
-* **Step:** Move the simulation one generation forward
-* **Clear:** Removes all "cells" from the grid
-* **Save:** Generates a string representing the current state of the grid
-* **Load:** Attempts to read the textarea to create the grid
+* **Step:** Move the simulation one generation forward [works while paused]
+* **Clear:** Removes all "cells" from the grid, also removes the trail [works while paused]
+* **Save:** Generates an array-like string representing the current state of the grid, the string will appear on the text area [works while paused]
+* **Load:** Attempts to read an array-like string from the text area to load it into the grid [works while paused]
 * **Speed:** Changes the speed of the simulation
 * **Grid:** Show/Hide the grid lines
-* **Trail:** Show/Hide the Trail
-* **Colors:** Changes the color of a part of the simulation, in this order:
+* **Trail:** Show/Hide the trail
+* **Colors:** Changes the color of a part of the simulation, from left to right:
   * Background
-  * grid
+  * Grid
   * Cells
   * Trail
-* **Random:** Populates the grid with a random patterns
-* **Pattern Select:** Draws some of the most iconic patterns into the grid
+* **Random:** Populates the grid with a random patterns [works while paused]
+* **Pattern Select:** Draws some of the most iconic patterns into the grid [works while paused]
 
 Future
 ------
 
+* [ ] disable buttons while paused
 * [ ] more intuitive controls
 * [ ] more initial patterns
 * [ ] zoom functionality
