@@ -1,6 +1,6 @@
 # javascript-game-of-life
 
-**javascript-game-of-life** is an implementation of a [Conway's Game of Life] created using [p5.js] to render all the graphics.
+**javascript-game-of-life** is an implementation of [Conway's Game of Life], created using [p5.js] to render all the graphics.
 
 * [Play the game now]
 
@@ -21,7 +21,7 @@ How To Use
 
 Click on any part of the grid to "activate" that cell.
 
-Controls:
+**Controls:**
 
 <h3 align="center">
   <img src="https://dl.dropboxusercontent.com/s/90lj0ff4vuffr0h/conway_04.png?dl=0" alt="javascript-game-of-life controls screenshot" />
@@ -31,17 +31,17 @@ Controls:
 * **Step:** Move the simulation one generation forward [works while paused]
 * **Clear:** Removes all "cells" from the grid, also removes the trail [works while paused]
 * **Save:** Generates an array-like string representing the current state of the grid, the string will appear on the text area [works while paused]
-* **Load:** Attempts to read an array-like string from the text area to load it into the grid [works while paused]
+* **Load:** Attempts to read an array-like string from the text area and loads it into the grid [works while paused]
 * **Speed:** Changes the speed of the simulation
 * **Grid:** Show/Hide the grid lines
 * **Trail:** Show/Hide the trail
-* **Colors:** Changes the color of a part of the simulation, from left to right:
+* **Colors:** Changes the color of part of the simulation, from left to right:
   * Background
   * Grid
   * Cells
   * Trail
-* **Random:** Populates the grid with a random patterns [works while paused]
-* **Pattern Select:** Draws some of the most iconic patterns into the grid [works while paused]
+* **Random:** Populates the grid with a random pattern [works while paused]
+* **Pattern Select:** Loads from a list of classic patterns [works while paused]
 
 Future
 ------
