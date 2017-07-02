@@ -16,17 +16,16 @@
   <img src="https://dl.dropboxusercontent.com/s/dd4tyhgdq6jk5yf/conway_03.png?dl=0" alt="javascript-game-of-life gameplay screenshot" />
 </h3>
 
-<h3 align="center">
-  <img src="https://dl.dropboxusercontent.com/s/90lj0ff4vuffr0h/conway_04.png?dl=0" alt="javascript-game-of-life controls screenshot" />
-</h3>
-
-
 How To Use
 ------
 
 Click on any part of the grid to "activate" that cell.
 
 Controls:
+
+<h3 align="center">
+  <img src="https://dl.dropboxusercontent.com/s/90lj0ff4vuffr0h/conway_04.png?dl=0" alt="javascript-game-of-life controls screenshot" />
+</h3>
 
 * **Run:** Plays the simulation
 * **Step:** Move the simulation one generation forward
@@ -55,4 +54,6 @@ Future
 Link References
 -->
 
+[Conway's Game of Life]:https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life
 [p5.js]:https://p5js.org/
+[Play the game now]:https://game-of-life-aruvham.herokuapp.com/
