@@ -43,14 +43,6 @@ Click on any part of the grid to "activate" that cell.
 * **Random:** Populates the grid with a random pattern [works while paused]
 * **Pattern Select:** Loads from a list of classic patterns [works while paused]
 
-Future
-------
-
-* [ ] disable buttons while paused
-* [ ] more intuitive controls
-* [ ] more initial patterns
-* [ ] zoom functionality
-
 <!---
 Link References
 -->
